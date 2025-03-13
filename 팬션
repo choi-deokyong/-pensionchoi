@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>펜션 예약 시스템</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .calendar { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; }
+        .day { padding: 10px; text-align: center; border: 1px solid #ddd; cursor: pointer; }
+        .reserved { background-color: gray; color: white; }
+        .available { background-color: white; }
+        .reservation-form { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>펜션 예약 시스템</h1>
+    <div id="calendar" class="calendar"></div>
+    
+    <div class="reservation-form">
+        <h2>예약 상세 정보</h2>
+        <form id="reservationForm">
+            <label>신청자: <input type="text" name="name" required></label><br>
+            <label>시간: <input type="time" name="time" required></label><br>
+            <label>인원: <input type="number" name="people" required></label><br>
+            <label>호실 수: <input type="number" name="rooms" required></label><br>
+            <label>차량 지원: <select name="carSupport">
+                <option value="yes">예</option>
+                <option value="no">아니오</option>
+            </select></label><br>
+            <button type="submit">예약 신청</button>
+        </form>
+    </div>
+    
+    <script>
+        const reservedDates = ["2025-03-15", "2025-03-18", "2025-03-22"]; // 예제 예약일
+        const calendar = document.getElementById("calendar");
+        
+        function generateCalendar(year, month) {
+            calendar.innerHTML = "";
+            const firstDay = new Date(year, month, 1).getDay();
+            const lastDate = new Date(year, month + 1, 0).getDate();
+            
+            for (let i = 0; i < firstDay; i++) {
+                calendar.innerHTML += '<div></div>';
+            }
+            
+            for (let day = 1; day <= lastDate; day++) {
+                let dateStr = `${year}-${(month + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+                let className = reservedDates.includes(dateStr) ? "reserved" : "available";
+                calendar.innerHTML += `<div class="day ${className}" data-date="${dateStr}">${day}</div>`;
+            }
+        }
+        
+        const today = new Date();
+        generateCalendar(today.getFullYear(), today.getMonth());
+        
+        document.querySelectorAll(".day").forEach(day => {
+            day.addEventListener("click", function() {
+                if (!this.classList.contains("reserved")) {
+                    alert(`선택한 날짜: ${this.dataset.date}`);
+                }
+            });
+        });
+        
+        document.getElementById("reservationForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            alert("예약이 접수되었습니다.");
+        });
+    </script>
+</body>
+</html>

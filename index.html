@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>안산교회 팬션 예약</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="image.png" alt="안산교회 팬션 로고">
+        </div>
+        <h1>안산교회 팬션 예약</h1>
+    </header>
+    
+    <section id="calendar">
+        <h2>예약 가능 날짜</h2>
+        <div id="calendar-container"></div>
+    </section>
+    
+    <section id="reservation-form">
+        <h2>예약 신청</h2>
+        <form id="booking-form">
+            <label for="name">이름:</label>
+            <input type="text" id="name" name="name" required>
+            
+            <label for="phone">전화번호:</label>
+            <input type="tel" id="phone" name="phone" required>
+            
+            <label for="date">예약 날짜:</label>
+            <input type="date" id="date" name="date" required>
+            
+            <button type="submit">예약 신청</button>
+        </form>
+    </section>
+    
+    <script src="script.js"></script>
+</body>
+</html>
